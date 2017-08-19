@@ -1,6 +1,4 @@
 <template name="SimpleChatWindow">
-
-
     <div class="box-body chat-scroll">
 
         <!-- Conversations are loaded here -->
@@ -13,57 +11,61 @@
                     </div>
                 {{else}}
                     {{#if hasMore }}
-                        <button class="btn btn-block btn-default" id="simple-chat-load-more">{{loadMore}}</button>
+                        <button class="btn btn-block btn-primary" id="simple-chat-load-more" style="width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 10px">{{loadMore}}</button>
                     {{/if}}
                 {{/unless}}
                 <!-- Message. Default to the left -->
-                {{#each simpleChats}}
-                    {{#if message}}
-                        <div class="direct-chat-msg {{#if me}}right{{/if}} {{#unless viewedMe}}notViewed{{/unless}}"
-                             id="{{_id}}">
-                            <div class="direct-chat-info clearfix">
-                                <span class="direct-chat-name pull-left">{{name}}</span>
-                                <span class="direct-chat-timestamp pull-right">{{formatDate date}}</span>
-                            </div>
-                            <!-- /.direct-chat-info -->
-                            {{#if avatar}}
-                                <img class="direct-chat-img" src="{{avatar}}" alt="message user image"><!-- /.direct-chat-img -->
-                            {{/if}}
-                            <div class="direct-chat-text" style="{{#unless avatar}}margin: 5px 0 0 0px{{/unless}}">
-                                {{{message}}}
-                                {{#if me}}
-                                    <div class="direct-chat-checks">
-                                        {{#if sent}}
-                                            {{#if showReceived }}
-                                                <i class="icon-check {{#if viewedAll}}chat-viewed{{/if}}"></i>
-                                                {{#if receivedAll}}
-                                                    <i class="icon-check {{#if viewedAll}}chat-viewed{{/if}}"></i>
-                                                {{/if}}
-                                            {{/if}}
-                                        {{else}}
-                                            <i class="icon-clock"></i>
-                                        {{/if}}
-
-                                    </div>
+                {{#if isSimpleChatsEmpty}}
+                     Welcome to your League messenger. Only your friends from this league will see it.
+                {{else}}
+                    {{#each simpleChats}}
+                        {{#if message}}
+                            <div class="direct-chat-msg {{#if me}}right{{/if}} {{#unless viewedMe}}notViewed{{/unless}}"
+                                 id="{{_id}}">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name pull-left">{{name}}</span>
+                                    <span class="direct-chat-timestamp pull-right">{{formatDate date}}</span>
+                                </div>
+                                <!-- /.direct-chat-info -->
+                                {{#if avatar}}
+                                    <img class="direct-chat-img" src="{{avatar}}" alt="message user image"><!-- /.direct-chat-img -->
                                 {{/if}}
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                    {{else}}
+                                <div class="direct-chat-text" style="{{#unless avatar}}margin: 5px 0 0 0px{{/unless}}">
+                                    {{{message}}}
+                                    {{#if me}}
+                                        <div class="direct-chat-checks">
+                                            {{#if sent}}
+                                                {{#if showReceived }}
+                                                    <i class="icon-check {{#if viewedAll}}chat-viewed{{/if}}"></i>
+                                                    {{#if receivedAll}}
+                                                        <i class="icon-check {{#if viewedAll}}chat-viewed{{/if}}"></i>
+                                                    {{/if}}
+                                                {{/if}}
+                                            {{else}}
+                                                <i class="icon-clock"></i>
+                                            {{/if}}
 
-                        <div class="direct-chat-msg join"
-                             id="{{_id}}">
-                            {{#if avatar}}
-                                <img class="direct-chat-img" src="{{avatar}}" alt="message user image"  ><!-- /.direct-chat-img -->
-                            {{/if}}
-                            <div class="direct-chat-info clearfix" >
-                                <span class="direct-chat-name pull-left"> {{name}} {{#if join}}{{join}}{{else}}{{left}}{{/if}} {{room}} {{formatDate date}}</span>
-
+                                        </div>
+                                    {{/if}}
+                                </div>
+                                <!-- /.direct-chat-text -->
                             </div>
-                        </div>
-                    {{/if}}
-                    <!-- /.dir-->
-                {{/each}}
+                        {{else}}
+
+                            <div class="direct-chat-msg join"
+                                 id="{{_id}}">
+                                {{#if avatar}}
+                                    <img class="direct-chat-img" src="{{avatar}}" alt="message user image"  ><!-- /.direct-chat-img -->
+                                {{/if}}
+                                <div class="direct-chat-info clearfix" >
+                                    <span class="direct-chat-name pull-left"> {{name}} {{#if join}}{{join}}{{else}}{{left}}{{/if}} {{room}} {{formatDate date}}</span>
+
+                                </div>
+                            </div>
+                        {{/if}}
+                        <!-- /.dir-->
+                    {{/each}}
+                {{/if}}
             </div>
         </div>
         <!--/.direct-chat-messages-->
@@ -80,6 +82,4 @@
     </div>
     <!-- /.box-footer-->
 
-
 </template>
-

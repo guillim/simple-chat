@@ -35,5 +35,31 @@ Meteor.methods({
         msg._id=Chats.insert(msg)
         SimpleChat.options.onNewMessage(msg)
         return msg
-    }
+    },
+    "SimpleChat.notificationCount": function (roomId, username) {
+        check(roomId, String);
+        check(username, Match.Maybe(String));
+        this.unblock();
+        if (!SimpleChat.options.allow.call(this, 'message', roomId, username, null, username))
+            throw new Meteor.Error(403, "Access deny");
+
+        var lastMsg = Chats.findOne(
+            {
+              username: username,
+              roomId: roomId
+            },
+            {
+              sort: {  date: -1 },
+              limit: 1
+            });
+            // console.log(lastMsg);console.log(lastMsg.date);
+
+        var msgs = Chats.find({
+            roomId: roomId,
+            date: {
+                $gte: lastMsg.date
+            }
+        }).fetch();
+        return msgs.length - 1 >= 0 ? msgs.length - 1 : 0;
+    } 
 });

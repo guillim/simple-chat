@@ -1,6 +1,6 @@
 Package.describe({
-    summary: "Simple pop up chat window. Easy. Simplification of cesarve77 version",
-    version: "0.4.2",
+    summary: "Easy chat window. Pop up as a bootstrap modal. Simplification of cesarve77 version",
+    version: "0.4.21",
     name: "guillim:simple-chat",
     git: "https://github.com/guillim/simple-chat"
 });

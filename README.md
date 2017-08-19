@@ -9,15 +9,6 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 - auto scroll on new message
 - load more button
 
-## Demo
-
-### Working demo
-[http://simpleschat.herokuapp.com/]
-
-### Demo source
-
-[https://github.com/guillim/demo-simple-chat]
-
 ## Installing
 
     $ meteor add guillim:simple-chat
@@ -49,14 +40,7 @@ Where
 - \<room>:  text for  message Room defaut 'room'
 
 
-Note: this values can be a literal a helper or template data
-
-Example:
-
-    {{>SimpleChatWindow roomId="free room" username=this.username limit=limit}}
-    //roomIn is a literal
-    //username is data template
-    //limit is a helper
+Example:    {{>SimpleChatWindow roomId="free room" username=this.username limit=limit}}
 
 
 ## Configure Globally
@@ -111,5 +95,3 @@ as you saw below
 
 Chat html was taken from https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html
 with direct chat widget
-
-#

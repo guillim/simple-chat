@@ -12,8 +12,8 @@ export const SimpleChat = {
             room: 'room at'
 
         },
-        limit: 50,
-        showViewed: false,
+        limit: 5,
+        showViewed: true,
         showReceived: false,
         showJoined: false,
         publishChats: function (roomId, limi) {
@@ -23,11 +23,10 @@ export const SimpleChat = {
             return true
         },
         onNewMessage: function (msg) {
-            console.log(msg)
+            // console.log(msg)
         },
-        onReceiveMessage: function () {
-
-        }
+        onReceiveMessage: function () {},
+        onJoin: function () {}
     },
     configure: function (options) {
         this.options = this.options || {};
