@@ -7,7 +7,7 @@
   position: relative;
   border-radius: 3px;
   background: #ffffff;
-  border-top: 3px solid #d2d6de;
+  border-top: 3px solid #e6e9ee;
   margin-bottom: 20px;
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -25,7 +25,7 @@
   border-top-color: #00a65a;
 }
 .box.box-default {
-  border-top-color: #d2d6de;
+  border-top-color: #e6e9ee;
 }
 .box.collapsed-box .box-body,
 .box.collapsed-box .box-footer {
@@ -59,12 +59,12 @@
   background: rgba(0, 0, 0, 0.1);
 }
 .box.box-solid.box-default {
-  border: 1px solid #d2d6de;
+  border: 1px solid #e6e9ee;
 }
 .box.box-solid.box-default > .box-header {
   color: #444444;
-  background: #d2d6de;
-  background-color: #d2d6de;
+  background: #e6e9ee;
+  background-color: #e6e9ee;
 }
 .box.box-solid.box-default > .box-header a,
 .box.box-solid.box-default > .box-header .btn {
@@ -434,7 +434,7 @@
 }
 
 .direct-chat-msg {
-  margin-bottom: 10px;
+  margin-bottom: 1px;
 }
 .direct-chat-msg:before,
 .direct-chat-msg:after {
@@ -455,9 +455,10 @@
   border-radius: 5px;
   position: relative;
   padding: 5px 10px;
-  background: #d2d6de;
-  border: 1px solid #d2d6de;
-  margin: 5px 0 0 50px;
+  background: #e6e9ee;
+  border: 1px solid #e6e9ee;
+  margin: 0px 0 0 50px;
+  font-size: 12px;
   color: #444444;
 }
 .direct-chat-text:after,
@@ -466,7 +467,7 @@
   right: 100%;
   top: 15px;
   border: solid transparent;
-  border-right-color: #d2d6de;
+  border-right-color: #e6e9ee;
   content: ' ';
   height: 0;
   width: 0;
@@ -489,7 +490,7 @@
   right: auto;
   left: 100%;
   border-right-color: transparent;
-  border-left-color: #d2d6de;
+  border-left-color: #e6e9ee;
 }
 .direct-chat-img {
   border-radius: 50%;
@@ -497,13 +498,17 @@
   width: 40px;
   height: 40px;
 }
+.direct-chat-img img{
+  border-radius: 50%;
+  margin-top: -2px;
+}
 .right .direct-chat-img {
   float: right;
 }
 .direct-chat-info {
   display: block;
   margin-bottom: 2px;
-  font-size: 12px;
+  font-size: 10px;
 }
 .direct-chat-name {
   font-weight: 600;
@@ -695,11 +700,6 @@
 
 @font-face {
     font-family: "chat";
-    src:url("/packages/cesarve_simple-chat/assets/fonts/chat.eot");
-    src:url("/packages/cesarve_simple-chat/assets/fonts/chat.eot?#iefix") format("embedded-opentype"),
-    url("/packages/cesarve_simple-chat/assets/fonts/chat.woff") format("woff"),
-    url("/packages/cesarve_simple-chat/assets/fonts/chat.ttf") format("truetype"),
-    url("/packages/cesarve_simple-chat/assets/fonts/chat.svg#chat") format("svg");
     font-weight: normal;
     font-style: normal;
 
@@ -772,7 +772,7 @@
     font-size: 9px;
 }
 .direct-chat-checks{
-    color: #d2d6de;
+    color: #e6e9ee;
     position: absolute;
     bottom: -4px;
     right: 0;
@@ -797,6 +797,3 @@
 .direct-chat-msg.join .direct-chat-name {
     line-height: 25px;
 }
-
-
-

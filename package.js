@@ -1,8 +1,8 @@
 Package.describe({
     summary: "Easy chat window. Pop up as a bootstrap modal. Simplification of cesarve77 version",
     version: "0.4.21",
-    name: "guillim:simple-chat",
-    git: "https://github.com/guillim/simple-chat"
+    name: "guilli:simple-chat",
+    git: "https://github.com/guilli/simple-chat"
 });
 Package.onUse(function (api) {
     api.versionsFrom('1.4');
@@ -15,7 +15,6 @@ Package.onUse(function (api) {
         'reactive-var'
     ])
     api.use(['check'], ['server', 'client'])
-    api.addAssets(['assets/fonts/chat.eot','assets/fonts/chat.woff','assets/fonts/chat.svg','assets/fonts/chat.ttf'],'client')
     api.mainModule('client.js', 'client');
     api.mainModule('server.js', 'server');
 });

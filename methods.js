@@ -11,7 +11,6 @@ Meteor.methods({
         check(avatar, Match.Maybe(String));
         check(name, Match.Maybe(String));
         check(custom, Match.Any );
-
         this.unblock()
         if (!SimpleChat.options.allow.call(this, message, roomId, username, avatar, name))
             throw new Meteor.Error(403, "Access deny")
@@ -61,5 +60,5 @@ Meteor.methods({
             }
         }).fetch();
         return msgs.length - 1 >= 0 ? msgs.length - 1 : 0;
-    } 
+    }
 });

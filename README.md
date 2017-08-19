@@ -5,9 +5,11 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 ## Features
 
 - Very simple api chat window
-- Multiple chat in the same view
+- your are connected with your default meteorID
+- you need to give a roomId as
 - auto scroll on new message
 - load more button
+- Avatar based on the username
 
 ## Installing
 
@@ -17,30 +19,7 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 
 just paste the template
 
-    {{>SimpleChatWindow roomId=<roomId> username=<username> name=<name> avatar=<avatar> limit=<limit> showViewed=<showViewed>  showJoined=<showJoined> publishChats=<publishChats> allow=<allow> custom=<custom>}}  
-
-
-Where
-- \<roomId>: required, plain string or function return a unique id for each room ,
-- \<username>: required, plain string or function  return a string with unique user id or user name or any unique identifier  ,
-- \<name>: optional, plain string or function  return a string with display name, default  username value
-- \<avatar>: optional,plain string or function  return a string avatar image source
-- \<limit>: optional number fot limit the last "n" messages for subscription, default 50
-- \<showViewed>: optional boolean for showing or not when the messages are viewed (like whatsapp). Default false (this feature can use a lot of server resource), default false
-- \<showReceived>: optional boolean for showing or not when the messages are received (like whatsapp) (this feature can use a lot of server resource), default false
-- \<showJoined>: optional boolean for showing message when some user join to a room, default false
-- \<publishChats>: optional function return true for allow publish message, or false to deny this function receive as arguments (roomId, limit) and context is publish context, default return true
-- \<allow>: optional function return true for allow insert new message or false to deny, this function receive as argumetns (message, roomId, username, avatar, name) and context is methods context, default return true
-- \<custom>: optional any custom value
-- \<loadMore>: text for load more button default 'Load More'
-- \<placeholder>: text for input placeholder default 'Type message...'
-- \<button>: text for button submit default 'Send'
-- \<join>:  text for  message Join default  'Join to'
-- \<left>:  text for  message left default  'Left the'
-- \<room>:  text for  message Room defaut 'room'
-
-
-Example:    {{>SimpleChatWindow roomId="free room" username=this.username limit=limit}}
+{{> SimpleChatMessageIcon roomId=roomId}}
 
 
 ## Configure Globally

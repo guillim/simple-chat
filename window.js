@@ -57,7 +57,7 @@ Template.SimpleChatWindow.onCreated(function () {
         this.subscribe("simpleChats", this.getRoomId(), this.limit.get());
         this.subscribing = true;
     })
-    Meteor.call("SimpleChat.join", this.getRoomId(), this.getUsername(), this.getAvatar(), this.getName())
+    // Meteor.call("SimpleChat.join", this.getRoomId(), this.getUsername(), this.getAvatar(), this.getName())
 });
 
 Template.SimpleChatWindow.onRendered(function () {
@@ -67,7 +67,7 @@ Template.SimpleChatWindow.onRendered(function () {
         if (event.currentTarget.scrollHeight - event.currentTarget.scrollTop < 350) {
             self.endScroll = true;
         } else {
-            self.endScroll = false;
+            self.endScroll = true;
         }
     })
     this.autorun(() => {
@@ -76,7 +76,7 @@ Template.SimpleChatWindow.onRendered(function () {
             /**
              * the setTimeOut is to be sure that dom already update, and make the real calc of scroñ
              */
-            this.$('.direct-chat-messages').scrollTop(this.$('.scroll-height')[0].scrollHeight - this.scroll)
+            // this.$('.direct-chat-messages').scrollTop(this.$('.scroll-height')[0].scrollHeight - this.scroll)
 
 
         } else {
@@ -84,7 +84,7 @@ Template.SimpleChatWindow.onRendered(function () {
             if (this.initializing)
                 Meteor.setTimeout(()=> {
                     this.initializing = false
-                    SimpleChat.scrollToEnd(this)
+                    // SimpleChat.scrollToEnd(this)
                 },50)
 
         }
@@ -97,10 +97,10 @@ Template.SimpleChatWindow.onRendered(function () {
             if (window.visivility == "visible") {
                 $('.notViewed').filter(':onscreen').each(function (i, o) {
                     $(o).removeClass('notViewed')
-                    Meteor.call("SimpleChat.messageViewed", $(o).attr('id'), username, function (err) {
-                        if (err)
-                            $(o).addClass('notViewed')
-                    })
+                    // Meteor.call("SimpleChat.messageViewed", $(o).attr('id'), username, function (err) {
+                    //     if (err)
+                    //         $(o).addClass('notViewed')
+                    // })
                 })
             }
         }
@@ -161,6 +161,13 @@ Template.SimpleChatWindow.helpers({
 
         return chats;
     },
+    isSimpleChatsEmpty: function () {
+       var template = Template.instance();
+       var chats = Chats.findOne({
+           roomId: template.getRoomId()
+       });
+       return typeof chats == "undefined" ? true : false;
+   },
     viewedMe: function () {
         return Template.instance().getUsername() == this.username || _.contains(this.viewedBy, Template.instance().getUsername())
     },
@@ -170,7 +177,30 @@ Template.SimpleChatWindow.helpers({
                 limit: Template.instance().limit.get()
             }).count() === Template.instance().limit.get()
     },
+    notificationCount: function () {
+        var template = Template.instance();
+        var lastMsg = Chats.findOne({
+            username: template.getUsername(),
+            roomId: template.getRoomId()
+        }, {
+            sort: {
+                date: -1
+            },
+            limit: 1
+        });
 
+        if (!lastMsg) {
+            return 0;
+        }
+
+        var msgs = Chats.find({
+            roomId: template.getRoomId(),
+            date: {
+                $gte: lastMsg.date
+            }
+        }).fetch();
+        return msgs.length - 1 >= 0 ? msgs.length - 1 : 0;
+    },
     me: function () {
         return Template.instance().getUsername() == this.username
     }
@@ -222,3 +252,58 @@ Template.SimpleChatWindow.events({
 
     }
 });
+
+
+
+
+
+Template.SimpleChatMessageIcon.helpers({
+    username: function () {
+        var user = Meteor.users.findOne({
+            _id: Meteor.userId()
+        });
+        return globalFunction_getUsername(user, 'no username');
+    },
+    ligue: function () {
+        return Template.currentData().uniqueLigueId;
+    },
+    messageCount: function () {
+        var user = Meteor.users.findOne({
+            _id: Meteor.userId()
+        });
+        var username = globalFunction_getUsername(user, 'no username');
+        var lastMsg = Chats.findOne({
+            username: username,
+            roomId: Template.currentData().uniqueLigueId
+        }, {
+            sort: {
+                date: -1
+            },
+            limit: 1
+        });
+        if (!lastMsg) {     var msgs = Chats.find({ roomId: Template.currentData().uniqueLigueId },{limit: 99,fields: {roomId: 1}}).fetch();
+      }else {             var msgs = Chats.find({ roomId: Template.currentData().uniqueLigueId, date: {$gte: lastMsg.date}},{limit: 99,fields: {roomId: 1}}).fetch();
+        }
+
+        return msgs.length - 1 >= 0 ? msgs.length - 1 : 0;
+    }
+});
+
+
+Template.SimpleChatAvatar.helpers({
+     options: function(){
+       let coeff = 5;
+       let username = (Template.currentData().username) ? Template.currentData().username : 'default' ;
+  		 let size = (Template.currentData().size) ? Template.currentData().size : 50 ;
+       let coeffHeight_width = (Template.currentData().coeffHeight_width) ? Template.currentData().coeffHeight_width : 1 ;
+  		 return {
+         name:username,
+         textColor:'#ffffff',
+         width:size,
+         height:size/coeffHeight_width,
+         charCount:6,
+         fontSize:size/coeff,
+         fontWeight:800,
+       }
+     }
+  });

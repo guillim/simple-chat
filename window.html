@@ -23,14 +23,11 @@
                             <div class="direct-chat-msg {{#if me}}right{{/if}} {{#unless viewedMe}}notViewed{{/unless}}"
                                  id="{{_id}}">
                                 <div class="direct-chat-info clearfix">
-                                    <span class="direct-chat-name pull-left">{{name}}</span>
                                     <span class="direct-chat-timestamp pull-right">{{formatDate date}}</span>
                                 </div>
                                 <!-- /.direct-chat-info -->
-                                {{#if avatar}}
-                                    <img class="direct-chat-img" src="{{avatar}}" alt="message user image"><!-- /.direct-chat-img -->
-                                {{/if}}
-                                <div class="direct-chat-text" style="{{#unless avatar}}margin: 5px 0 0 0px{{/unless}}">
+                                <div class="direct-chat-img">{{> SimpleChatAvatar username=username size=35 coeffHeight_width=1 }}</div>
+                                <div class="direct-chat-text">
                                     {{{message}}}
                                     {{#if me}}
                                         <div class="direct-chat-checks">
@@ -50,18 +47,6 @@
                                 </div>
                                 <!-- /.direct-chat-text -->
                             </div>
-                        {{else}}
-
-                            <div class="direct-chat-msg join"
-                                 id="{{_id}}">
-                                {{#if avatar}}
-                                    <img class="direct-chat-img" src="{{avatar}}" alt="message user image"  ><!-- /.direct-chat-img -->
-                                {{/if}}
-                                <div class="direct-chat-info clearfix" >
-                                    <span class="direct-chat-name pull-left"> {{name}} {{#if join}}{{join}}{{else}}{{left}}{{/if}} {{room}} {{formatDate date}}</span>
-
-                                </div>
-                            </div>
                         {{/if}}
                         <!-- /.dir-->
                     {{/each}}
@@ -72,14 +57,44 @@
     </div>
     <!-- /.box-body -->
     <div class="box-footer">
-        <div class="input-group">
+        <div class="input-group" style="height:35px;">
             <input type="text" name="message" placeholder="{{placeholder}}" class="form-control"
-                   id="simple-chat-message">
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-primary btn-flat" id="message-send">{{button}}</button>
+                   id="simple-chat-message" style="height:inherit;">
+              <span class="input-group-btn" style="height:inherit;">
+                <button type="button" class="btn btn-primary btn-flat" id="message-send" style="height:inherit;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
               </span>
         </div>
     </div>
     <!-- /.box-footer-->
 
+</template>
+
+<template name="SimpleChatAvatar">
+	{{> initialjs options=options }}
+</template>
+
+
+<template name="SimpleChatMessageIcon">
+		<ul class="nav navbar-nav"  aria-label="msg" href="#simplechat_Modal" data-toggle="modal">
+        <li class="dropdown notificationsDropdown">
+          <a href="#" class="notification">
+            {{#if messageCount}}
+            <i class="fa fa-comment"></i>
+            <span class="badge bg-success">{{messageCount}}</span>
+            {{else}}
+            <i class="fa fa-comment-o"></i>
+            {{/if}}
+          </a>
+        </li>
+		</ul>
+    <div class="modal fade"    id="simplechat_Modal" style="color:black">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                {{> SimpleChatWindow roomId=ligue username=username showViewed=true placeholder="Message my friends" loadMore="Older messages"}}
+            </div>
+          </div>
+        </div>
+    </div>
 </template>

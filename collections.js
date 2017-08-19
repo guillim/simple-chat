@@ -35,7 +35,7 @@ Rooms.deny({
         return true;
     },
 });
-Chats.allow({
+Rooms.allow({
     insert() {
         return false;
     },
