@@ -1,40 +1,40 @@
 # Simple Chat window: the starter point to build your own chat, in seconds
 
+Note: was modified from the original version of cesarve77. so all this bellow may be slightly different now.
+
 ## Features
 
 - Very simple api chat window
 - Multiple chat in the same view
 - auto scroll on new message
 - load more button
-- optional beep on new message
 
-## Demo 
+## Demo
 
 ### Working demo
 [http://simpleschat.herokuapp.com/]
 
 ### Demo source
 
-[https://github.com/cesarve77/demo-simple-chat]
+[https://github.com/guillim/demo-simple-chat]
 
 ## Installing
 
-    $ meteor add cesarve:simple-chat 
+    $ meteor add guillim:simple-chat
 
 ## Usage
 
-just paste the template 
+just paste the template
 
     {{>SimpleChatWindow roomId=<roomId> username=<username> name=<name> avatar=<avatar> limit=<limit> showViewed=<showViewed>  showJoined=<showJoined> publishChats=<publishChats> allow=<allow> custom=<custom>}}  
-   
-      
+
+
 Where
-- \<roomId>: required, plain string or function return a unique id for each room , 
+- \<roomId>: required, plain string or function return a unique id for each room ,
 - \<username>: required, plain string or function  return a string with unique user id or user name or any unique identifier  ,
 - \<name>: optional, plain string or function  return a string with display name, default  username value
-- \<avatar>: optional,plain string or function  return a string avatar image source 
+- \<avatar>: optional,plain string or function  return a string avatar image source
 - \<limit>: optional number fot limit the last "n" messages for subscription, default 50
-- \<beep>: optional boolean emit sound on new message, default false
 - \<showViewed>: optional boolean for showing or not when the messages are viewed (like whatsapp). Default false (this feature can use a lot of server resource), default false
 - \<showReceived>: optional boolean for showing or not when the messages are received (like whatsapp) (this feature can use a lot of server resource), default false
 - \<showJoined>: optional boolean for showing message when some user join to a room, default false
@@ -59,11 +59,11 @@ Example:
     //limit is a helper
 
 
-## Configure Globally 
+## Configure Globally
 
 ```
 
-//somewhere in both (client and  server) 
+//somewhere in both (client and  server)
 import {SimpleChat} from 'meteor/cesarve:simple-chat/config'
 
 SimpleChat.configure ({
@@ -77,7 +77,6 @@ SimpleChat.configure ({
 
     },
     limit: 5,
-    beep: true, 
     showViewed: true,
     showReceived: true,
     showJoined: true,
@@ -95,7 +94,7 @@ SimpleChat.configure ({
     onNewMessage:function(msg){  //both
     },
     onReceiveMessage:function(id, message, room){ //server
-        
+
     },
     onJoin:function(roomId, username, name,date){  //server
     },
@@ -112,27 +111,5 @@ as you saw below
 
 Chat html was taken from https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html
 with direct chat widget
-
-Icons :
-
-[http://simpleschat.herokuapp.com/icons.html](http://simpleschat.meteor.com/icons.html)
-
-# Specials 
-
-To [Jetbrains.com](Jetbrains.com) for give us a free licences of their amazing softwares
-
-# Contributing 
-
-1) Please help me with my english
-
-2) Pull request are very welcome
-
-3) fork the repo
-
-5) make changes
-
-6) commit
-
-7) make a pull request
 
 #

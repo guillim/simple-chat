@@ -20,7 +20,6 @@ Template.SimpleChatWindow.onCreated(function () {
 
     this.initializing = true;
     this.limit = new ReactiveVar(this.limit || SimpleChat.options.limit)
-    this.beep = this.data.beep != undefined ? this.data.beep : SimpleChat.options.beep
     this.showViewed = this.data.showViewed != undefined ? this.data.showViewed : SimpleChat.options.showViewed
     this.showJoined = this.data.showJoined != undefined ? this.data.showJoined : SimpleChat.options.showJoined
     this.showReceived = this.data.showReceived != undefined ? this.data.showReceived : SimpleChat.options.showReceived
@@ -110,17 +109,9 @@ Template.SimpleChatWindow.onRendered(function () {
     }
     $(window).on('SimpleChat.newMessage', (e, id, doc)=> {
         if (this.endScroll) {
-
             SimpleChat.scrollToEnd(this)
-            if (this.beep && window.visivility == 'hidden') {
-                new Audio('/packages/cesarve_simple-chat/assets/bell.mp3').play()
-            }
-        } else {
-            if (this.beep && username != doc.username) {
-                new Audio('/packages/cesarve_simple-chat/assets/bell.mp3').play()
-            }
         }
-    })
+      })
 })
 
 
@@ -231,6 +222,3 @@ Template.SimpleChatWindow.events({
 
     }
 });
-
-
-

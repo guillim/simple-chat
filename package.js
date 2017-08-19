@@ -1,12 +1,11 @@
 Package.describe({
-    summary: "Simple chat window. The star point to make your own chat",
+    summary: "Simple pop up chat window. Easy. Simplification of cesarve77 version",
     version: "0.4.2",
-    name: "cesarve:simple-chat",
-    git: "https://github.com/cesarve77/simple-chat"
+    name: "guillim:simple-chat",
+    git: "https://github.com/guillim/simple-chat"
 });
 Package.onUse(function (api) {
     api.versionsFrom('1.4');
-
     api.use([
         'templating',
         'check',
@@ -16,7 +15,6 @@ Package.onUse(function (api) {
         'reactive-var'
     ])
     api.use(['check'], ['server', 'client'])
-    api.addAssets(['assets/bell.mp3'],'client')
     api.addAssets(['assets/fonts/chat.eot','assets/fonts/chat.woff','assets/fonts/chat.svg','assets/fonts/chat.ttf'],'client')
     api.mainModule('client.js', 'client');
     api.mainModule('server.js', 'server');

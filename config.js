@@ -13,7 +13,6 @@ export const SimpleChat = {
 
         },
         limit: 50,
-        beep: false,
         showViewed: false,
         showReceived: false,
         showJoined: false,
@@ -36,4 +35,3 @@ export const SimpleChat = {
         return this;
     }
 }
-
