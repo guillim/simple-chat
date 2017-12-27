@@ -11,7 +11,7 @@
                     </div>
                 {{else}}
                     {{#if hasMore }}
-                        <button class="btn btn-block btn-primary" id="simple-chat-load-more" style="width: 60%; margin-left: auto; margin-right: auto; margin-bottom: 10px">{{loadMore}}</button>
+                        <div style="text-align:center"><span class="btn btn-default btn-nowhite-space" id="simple-chat-load-more" style="margin-bottom: 10px">{{loadMore}}</span></div>
                     {{/if}}
                 {{/unless}}
                 <!-- Message. Default to the left -->
@@ -61,7 +61,7 @@
             <input type="text" name="message" placeholder="{{placeholder}}" class="form-control"
                    id="simple-chat-message" style="height:inherit;">
               <span class="input-group-btn" style="height:inherit;">
-                <button type="button" class="btn btn-primary btn-flat" id="message-send" style="height:inherit;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-default btn-flat" id="message-send" style="height:inherit;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
               </span>
         </div>
     </div>
