@@ -19,7 +19,9 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 
 just paste the template
 
-{{> SimpleChatMessageIcon roomId=roomId}}
+``` 
+{{> SimpleChatMessageIcon roomId=roomId}} 
+```
 
 
 ## Configure Globally
