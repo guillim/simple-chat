@@ -2,7 +2,7 @@ Package.describe({
     summary: "Easy chat window. Pop up as a bootstrap modal. Simplification of cesarve77 version",
     version: "0.4.25",
     name: "guillim:simple-chat",
-    git: "https://github.com/guilli/simple-chat"
+    git: "https://github.com/guillim/simple-chat"
 });
 Package.onUse(function (api) {
     api.versionsFrom('1.4');
