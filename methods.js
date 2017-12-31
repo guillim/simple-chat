@@ -4,7 +4,7 @@ import {Match} from 'meteor/check'
 import {Chats} from './collections'
 import {SimpleChat} from './config'
 Meteor.methods({
-    "SimpleChat.newMessage": function (message, roomId, username, avatar, name, custom) {
+    "SimpleChat.newMessage": function (message, roomId, username, avatar, name, custom, sendNotif = true) {
         check(message, String);
         check(roomId, String);
         check(username, Match.Maybe(String));
@@ -24,7 +24,7 @@ Meteor.methods({
             sent: !this.isSimulation,
             receivedBy: [],
             receivedAll: false,
-            viewedBy: [],
+            viewedBy: [Meteor.userId()],
             viewedAll: false,
             userId: this.userId,
             avatar,
@@ -33,6 +33,9 @@ Meteor.methods({
         }
         msg._id=Chats.insert(msg)
         SimpleChat.options.onNewMessage(msg)
+
+        if(sendNotif) Meteor.call('serverNotificationToLigueUsersForNewMessagenoBadgeUpdate',roomId,message,Meteor.userId());
+
         return msg
     },
     "SimpleChat.notificationCount": function (roomId, username) {

@@ -52,7 +52,6 @@ Template.SimpleChatWindow.onCreated(function () {
     else
         this.getAvatar = this.data.avatar
 
-
     this.autorun(() => {
         this.subscribe("simpleChats", this.getRoomId(), this.limit.get());
         this.subscribing = true;
@@ -91,22 +90,7 @@ Template.SimpleChatWindow.onRendered(function () {
 
 
     })
-    const username = this.getUsername()
-    if (this.showViewed) {
-        const checkViewed = ()=> {
-            if (window.visivility == "visible") {
-                $('.notViewed').filter(':onscreen').each(function (i, o) {
-                    $(o).removeClass('notViewed')
-                    // Meteor.call("SimpleChat.messageViewed", $(o).attr('id'), username, function (err) {
-                    //     if (err)
-                    //         $(o).addClass('notViewed')
-                    // })
-                })
-            }
-        }
-        $(window).on('resize scroll focus', checkViewed)
-        $('.direct-chat-messages').on('scroll', checkViewed)
-    }
+
     $(window).on('SimpleChat.newMessage', (e, id, doc)=> {
         if (this.endScroll) {
             SimpleChat.scrollToEnd(this)
@@ -267,26 +251,27 @@ Template.SimpleChatMessageIcon.helpers({
     ligue: function () {
         return Template.currentData().uniqueLigueId;
     },
-    messageCount: function () {
-        var user = Meteor.users.findOne({
-            _id: Meteor.userId()
-        });
+    messageCount: function(){
+        var user = Meteor.users.findOne({            _id: Meteor.userId()        });
         var username = globalFunction_getUsername(user, 'no username');
-        var lastMsg = Chats.findOne({
-            username: username,
-            roomId: Template.currentData().uniqueLigueId
-        }, {
-            sort: {
-                date: -1
-            },
-            limit: 1
-        });
+        var lastMsg = Chats.findOne({viewedBy: user._id,roomId: Template.currentData().uniqueLigueId}  ,   { sort: { date: -1  }, limit: 1 });
         if (!lastMsg) {     var msgs = Chats.find({ roomId: Template.currentData().uniqueLigueId },{limit: 99,fields: {roomId: 1}}).fetch();
-      }else {             var msgs = Chats.find({ roomId: Template.currentData().uniqueLigueId, date: {$gte: lastMsg.date}},{limit: 99,fields: {roomId: 1}}).fetch();
+        }else {             var msgs = Chats.find({ roomId: Template.currentData().uniqueLigueId, date: {$gte: lastMsg.date}},{limit: 99,fields: {roomId: 1}}).fetch();
         }
-
         return msgs.length - 1 >= 0 ? msgs.length - 1 : 0;
-    }
+    },
+});
+
+
+Template.SimpleChatMessageIcon.events({
+    'click .navbar-nav': function () {
+        // let template = Template.instance()
+        // template.scroll = template.$('.scroll-height')[0].scrollHeight
+        var user = Meteor.users.findOne({          _id: Meteor.userId()      });
+        var username = globalFunction_getUsername(user, 'no username');
+        var lastMsg = Chats.findOne({ roomId: Template.currentData().uniqueLigueId }   ,   {sort: { date: -1 }, limit: 1 });
+        if(lastMsg){   Meteor.call("SimpleChat.markMessageAsViewedForUser",  lastMsg._id, user._id )    }
+    },
 });
 
 

@@ -87,4 +87,19 @@ Meteor.methods({
         }
         return false
     },
+    "SimpleChat.markMessageAsViewedForUser": function (id, userId) {
+        check(id, String);
+        check(userId, String);
+        this.unblock()
+        Meteor._sleepForMs(800 * Meteor.isDevelopment)
+
+        const message = Chats.findOne(id, {fields: {roomId: 1, viewedBy: 1}})
+        if (!message)
+            throw Meteor.Error(403, "Message does not exist")
+        if (!_.contains(message.viewedBy, userId)) {
+            let re =   Chats.update(id, {                $addToSet: {viewedBy: userId}            })
+            return re;
+        }
+        return false
+    },
 })
