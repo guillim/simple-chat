@@ -30,7 +30,7 @@ Parameters required:
 - uniqueLigueId, ligue: same as roomId, they will be merged with roomId in further version
 
 
-## Configure Globally
+## Options
 
 ```
 //both (client and  server)
@@ -63,5 +63,6 @@ SimpleChat.configure ({
 
 ```
 
-this options can be overwrite individually on   {{>SimpleChatWindow roomId=\<roomId> username=\<username> avatar=\<avatar> limit=\<limit> showViewed=true  showJoined= true publishChats=publishChats allow=allow}} cd simple-
+this options can be overwrite individually on  ``` {{>SimpleChatWindow roomId=\<roomId> username=\<username> avatar=\<avatar> limit=\<limit> showViewed=true  showJoined= true publishChats=publishChats allow=allow}} ``` 
+cd simple-
 as you saw below
