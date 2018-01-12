@@ -4,15 +4,11 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 
 ## Features
 
-- Deadly simple: integrate the chat icon on top of your page, done.
-- your are connected with your default meteorID
-- auto scroll on new message
-- load more button
+- Deadly simple integration
+- Your are connected with your default meteorID
+- Auto scroll on new message
+- Load more button
 - Avatar based on the username
-
-
-- you need to give a roomId as
-
 
 ## Installing
 
@@ -20,18 +16,20 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 
 ## Usage
 
-just integrate the template
-
 ``` 
 {{> SimpleChatMessageIcon roomId=roomId uniqueLigueId=roomId ligue=roomId}} 
 ```
 
-the following parameters are required:
--roomId: shared between all members of the chat. Note that is is on you to generate this roomId and handle users who have access to this chat.
+Note:
+- make sure user is connected):
 
--uniqueLigueId: same, will be gatehered in further version
+Parameters required:
 
--ligue: same, will be gatehered in further version
+- roomId: shared between all members of the chat. Note that is is on you to generate this roomId and handle users who have access to this chat.
+
+- uniqueLigueId: same, will be gatehered in further version
+
+- ligue: same, will be gatehered in further version
 
 
 ## Configure Globally
