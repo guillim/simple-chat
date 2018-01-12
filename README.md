@@ -21,15 +21,13 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 ```
 
 Note:
-- make sure user is connected):
+- make sure user is connected:
 
 Parameters required:
 
-- roomId: shared between all members of the chat. Note that is is on you to generate this roomId and handle users who have access to this chat.
+- roomId: String shared between all members of the chat. It is on you to generate this roomId, and handle users who have access to this chat. Since everyone using this rooId will be part of the chat.
 
-- uniqueLigueId: same, will be gatehered in further version
-
-- ligue: same, will be gatehered in further version
+- uniqueLigueId, ligue: same as roomId, they will be merged with roomId in further version
 
 
 ## Configure Globally
