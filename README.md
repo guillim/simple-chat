@@ -1,15 +1,18 @@
-# Simple Chat window: the starter point to build your own chat, in seconds
+# Simple Chat: get your own chat, in seconds
 
-Note: was modified from the original version of cesarve77. so all this bellow may be slightly different now.
+Note: was modified from the original version of cesarve77. so all this bellow may be slightly different now, and is still under construction. Feel free to ask by opening issues.
 
 ## Features
 
-- Very simple api chat window
+- Deadly simple: integrate the chat icon on top of your page, done.
 - your are connected with your default meteorID
-- you need to give a roomId as
 - auto scroll on new message
 - load more button
 - Avatar based on the username
+
+
+- you need to give a roomId as
+
 
 ## Installing
 
@@ -17,18 +20,24 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 
 ## Usage
 
-just paste the template
+just integrate the template
 
 ``` 
-{{> SimpleChatMessageIcon roomId=roomId}} 
+{{> SimpleChatMessageIcon roomId=roomId uniqueLigueId=roomId ligue=roomId}} 
 ```
+
+the following parameters are required:
+-roomId: shared between all members of the chat. Note that is is on you to generate this roomId and handle users who have access to this chat.
+
+-uniqueLigueId: same, will be gatehered in further version
+
+-ligue: same, will be gatehered in further version
 
 
 ## Configure Globally
 
 ```
-
-//somewhere in both (client and  server)
+//both (client and  server)
 import {SimpleChat} from 'meteor/cesarve:simple-chat/config'
 
 SimpleChat.configure ({
@@ -39,40 +48,24 @@ SimpleChat.configure ({
         join: 'Join to',
         left: 'Left the',
         room: 'room at'
-
     },
     limit: 5,
     showViewed: true,
     showReceived: true,
     showJoined: true,
     publishChats: function(roomId, limi){ //server
-       //here the context is the same for a Publications, that mean you have access to this.userId who are asking for subscribe.
-       // for example
-       return isLoggedAndHasAccessToSeeMessage(this.userId)
+       return isLoggedAndHasAccessToSeeMessage(this.userId) // for example
     },
     allow: function(message, roomId, username, avatar, name){
-       //here the context is the same for a Methods, thats mean you hace access to this.userId also
-       // for example
-       return isLoggedAndHasAccessSendMessages(this.userId)
-        return true
+       return isLoggedAndHasAccessSendMessages(this.userId) // for example
     },
-    onNewMessage:function(msg){  //both
-    },
-    onReceiveMessage:function(id, message, room){ //server
-
-    },
-    onJoin:function(roomId, username, name,date){  //server
-    },
-    onLeft:function(roomId, username, name,date) { //server
-    }
+    onNewMessage:function(msg){ }, //both
+    onReceiveMessage:function(id, message, room){  }, //server
+    onJoin:function(roomId, username, name,date){  }, //server 
+    onLeft:function(roomId, username, name,date){  }  //server
 })
 
 ```
 
 this options can be overwrite individually on   {{>SimpleChatWindow roomId=\<roomId> username=\<username> avatar=\<avatar> limit=\<limit> showViewed=true  showJoined= true publishChats=publishChats allow=allow}} cd simple-
 as you saw below
-
-# Styling
-
-Chat html was taken from https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html
-with direct chat widget
