@@ -21,7 +21,7 @@ Note: was modified from the original version of cesarve77. so all this bellow ma
 ```
 
 Note:
-- make sure user is connected:
+- make sure user is connected
 
 Parameters required:
 
